@@ -1,0 +1,1 @@
+/etc/static/fish/nixos-env-preinit.fish

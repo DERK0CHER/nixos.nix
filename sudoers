@@ -1,0 +1,14 @@
+# Don't edit this file. Set the NixOS options ‘security.sudo.configFile’
+# or ‘security.sudo.extraRules’ instead.
+
+root     ALL=(ALL:ALL)    SETENV: ALL
+%wheel  ALL=(ALL:ALL)    SETENV: ALL
+
+
+# extraConfig
+
+
+# Keep terminfo database for root and %wheel.
+Defaults:root,%wheel env_keep+=TERMINFO_DIRS
+Defaults:root,%wheel env_keep+=TERMINFO
+
