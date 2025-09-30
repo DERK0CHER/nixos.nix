@@ -1,0 +1,60 @@
+{ config, pkgs, lib, ... }:
+
+{
+  imports = [ ./hardware-configuration.nix
+  	      ./hardware-configuration.nix
+	      ./modules/drivers.nix
+	      ./modules/packages.nix
+	      ./modules/environment.nix
+	      ./modules/hyprland.nix
+	      ./modules/services.nix
+	      ];
+	
+  services.xserver.enable=true;
+  services.xserver.displayManager.gdm.enable=true;
+  services.xserver.desktopManager.gnome.enable=true;
+
+  # ZFS boot support
+  boot.supportedFilesystems = [ "zfs" ];
+  boot.initrd.supportedFilesystems = [ "zfs" ];
+
+  # Required for ZFS imports at boot
+  networking.hostId = "3d6394da";
+
+  # EFI bootloader
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # Basic networking/time
+  networking.useDHCP = lib.mkDefault true;
+  time.timeZone = "Europe/Berlin";
+
+  # Encrypted swap with random key each boot
+  swapDevices = [
+    {
+      device = "/dev/disk/by-partuuid/9374bfc1-bcad-4a88-b0d2-71b0589cce1a";
+      randomEncryption.enable = true;
+    }
+  ];
+
+  # Helpful ZFS service
+  services.zfs.autoScrub.enable = true;
+
+  # Keep this at the release you install (adjust when you upgrade)
+  system.stateVersion = "25.05";
+  
+environment.systemPackages = with pkgs;[
+  
+  kitty
+  firefox
+  neovim
+  git
+  curl
+  btop
+  Discord
+
+
+];
+
+
+}
