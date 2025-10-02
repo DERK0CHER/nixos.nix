@@ -6,7 +6,15 @@
     enable = true;
     enable32Bit = true;
   };
-
+ hardware.opengl = {
+    enable = true;
+    extraPackages = with pkgs; [
+      vulkan-loader
+      vulkan-validation-layers
+      vulkan-tools  # For vulkaninfo testing
+    ];
+    extraPackages32 = with pkgs.pkgsi686Linux; [ vulkan-loader ];  # If needed for 32-bit
+  };
   # NVIDIA Configuration
   services.xserver.videoDrivers = [ "nvidia" ];
   

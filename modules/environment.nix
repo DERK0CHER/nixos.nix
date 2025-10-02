@@ -17,6 +17,8 @@
     XDG_SESSION_TYPE = "wayland";
     WLR_NO_HARDWARE_CURSORS = "1";  # If cursor issues
   };
+  programs.xwayland.enable = true;
+  programs.dconf.enable = true;
 
   # XDG portal for screen sharing
   xdg.portal = {
