@@ -18,9 +18,13 @@
   services.dbus.enable = true;
   security.polkit.enable = true;
 
-  # REMOVED: GNOME conflicts with Hyprland
-  # services.xserver.enable = true;  # Not needed for Hyprland-only
-  # services.xserver.displayManager.gdm.enable = false;
-  # services.xserver.desktopManager.gnome.enable = false;
+  hardware = {
+    #Opengl
+    opengl.enable = true;
+
+    nvidia.modesetting.enable = true;
+  }
+
+
 }
 
