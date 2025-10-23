@@ -47,10 +47,5 @@
     jack.enable = true;
   };
 
-  # Bluetooth (optional)
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = false;
-  };
 }
 

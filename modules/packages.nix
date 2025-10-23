@@ -8,8 +8,10 @@
     # Terminal & editor
     kitty
     neovim
+    zathura
     vscodium
     gummi
+
     
     
 
@@ -25,6 +27,8 @@
     feh
     gimp
     blueman
+    pkgs.dunst
+    libnotify
     
     # Communication
     discord
@@ -56,6 +60,7 @@
     nodejs
     glib
     qt6ct
+    pnpm
     
     gsettings-desktop-schemas
 
@@ -69,6 +74,12 @@
     noto-fonts-emoji
     font-awesome
     nerd-fonts.jetbrains-mono
+    iosevka-comfy.comfy
+    iosevka-comfy.comfy-motion
+    iosevka-comfy.comfy-fixed
+    iosevka
+
+
   ];
 programs.thunar.enable = true;
 programs.waybar.enable = true;

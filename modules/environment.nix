@@ -3,6 +3,17 @@
 {
   # Networking
   networking.useDHCP = lib.mkDefault true;
+  # Bluetooth
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Experimental = true;   # helps with some adapters/codecs
+      };
+    };
+     package = pkgs.bluez;   # usually default; uncomment to pin
+  };
   
   # Timezone
   time.timeZone = "Europe/Berlin";
@@ -25,5 +36,8 @@
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
+
+  environment.systemPackages = [ pkgs.waybar ];
+
 }
 
