@@ -26,6 +26,8 @@
     pkgs.dunst
     libnotify
 
+    ttfautohint
+
     # Communication
     discord
     vesktop
