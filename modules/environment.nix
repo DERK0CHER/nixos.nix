@@ -10,10 +10,12 @@
     settings = {
       General = {
         Experimental = true;   # helps with some adapters/codecs
+        FastConnectable = true;
       };
     };
      package = pkgs.bluez;   # usually default; uncomment to pin
   };
+  services.blueman.enable = true;
   
   # Timezone
   time.timeZone = "Europe/Berlin";
@@ -38,6 +40,17 @@
   };
 
   environment.systemPackages = [ pkgs.waybar ];
+
+  # Audio stack (recommended)
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    wireplumber.enable = true;
+  };
 
 }
 

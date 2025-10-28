@@ -3,7 +3,7 @@
 { config, pkgs, ... }:
 
 {
-  
+
   environment.systemPackages = with pkgs; [
     # Terminal & editor
     kitty
@@ -12,13 +12,9 @@
     vscodium
     gummi
 
-    
-    
-
-
     # Browser
     firefox
-    
+
     # System utilities
     git
     curl
@@ -29,24 +25,24 @@
     blueman
     pkgs.dunst
     libnotify
-    
+
     # Communication
     discord
     vesktop
     signal-desktop
     thunderbird
 
-  #Amenity  
-    spotify  
+    #Amenity
+    spotify
     spotify-player
     spotify-cli-linux
     # Hyprland essentials
     waybar
     wofi
     dunst
-    hyprshot      # screenshots
+    hyprshot # screenshots
     hyprcursor
-    slurp     # region selection
+    slurp # region selection
     wl-clipboard
     dunst
     hyprpaper
@@ -61,9 +57,22 @@
     glib
     qt6ct
     pnpm
-    
-    gsettings-desktop-schemas
 
+    # Node formatters
+    nodePackages.prettier
+    nodePackages.eslint_d
+
+    # Python formatters
+    black
+    python3Packages.isort
+
+    # Other formatters
+    stylua
+    shfmt
+    clang-tools # for clang-format
+    nixfmt
+    gsettings-desktop-schemas
+    pkgs.python313Packages.pylatexenc
     #garmin
     steam
   ];
@@ -79,12 +88,10 @@
     iosevka-comfy.comfy-fixed
     iosevka
 
-
   ];
-programs.thunar.enable = true;
-programs.waybar.enable = true;
+  programs.thunar.enable = true;
+  programs.waybar.enable = true;
 
-services.gvfs.enable = true; # Mount, trash, and other functionalities
-services.tumbler.enable = true; # Thumbnail support for images
+  services.gvfs.enable = true; # Mount, trash, and other functionalities
+  services.tumbler.enable = true; # Thumbnail support for images
 }
-

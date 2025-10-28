@@ -4,8 +4,6 @@
 {
 
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];  # Enables both common features
-
   # ZFS maintenance
   services.zfs.autoScrub.enable = true;
 

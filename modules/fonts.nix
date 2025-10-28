@@ -13,6 +13,7 @@
       fira-mono
       victor-mono
       source-code-pro
+      jetbrains-mono
     ];
   };
 }
