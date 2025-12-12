@@ -7,13 +7,22 @@
   environment.systemPackages = with pkgs; [
     # Terminal & editor
     kitty
+    fastfetch
     neovim
     zathura
     vscodium
+    jetbrains.webstorm
+    jetbrains.clion
     gummi
-
+    gparted
+    code-cursor
+    chromium
+    uxplay
+    tor
     # Browser
     firefox
+    wireplumber
+    pulseaudio
 
     # System utilities
     git
@@ -22,8 +31,7 @@
     nautilus
     feh
     gimp
-    blueman
-    pkgs.dunst
+    dunst
     libnotify
 
     ttfautohint

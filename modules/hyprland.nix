@@ -20,11 +20,7 @@
 
   hardware = {
     #Opengl
-    opengl.enable = true;
-
     nvidia.modesetting.enable = true;
   };
 
-
 }
-

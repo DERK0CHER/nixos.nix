@@ -1,6 +1,11 @@
 #MAIN CONFIG /etc/nixos/configuration.nix
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   imports = [
@@ -13,10 +18,13 @@
     ./modules/services.nix
     ./modules/users.nix
     ./modules/shell.nix
-    ./modules/fonts.nix
+    # ./modules/fonts.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   system.stateVersion = "25.05";
 }

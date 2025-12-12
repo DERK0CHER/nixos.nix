@@ -1,48 +1,70 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  # Networking
-  networking.useDHCP = lib.mkDefault true;
-  # Bluetooth
+  # --- Core Bluetooth ---
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
+    package = pkgs.bluez;
     settings = {
       General = {
-        Experimental = true;   # helps with some adapters/codecs
+        Experimental = true;
         FastConnectable = true;
+        JustWorksRepairing = "always";
+      };
+      Policy = {
+        AutoEnable = true;
       };
     };
-     package = pkgs.bluez;   # usually default; uncomment to pin
   };
   services.blueman.enable = true;
-  
-  # Timezone
+
+  # --- Firmware (Realtek USB BT 5.0) ---
+  hardware.enableAllFirmware = true;
+  hardware.firmware = with pkgs; [
+    rtl8761b-firmware
+  ];
+
+  # --- Stabilität für Realtek btusb ---
+  boot.extraModprobeConfig = ''
+    options btusb enable_autosuspend=0
+    options btusb disable_scofix=1
+  '';
+
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{bDeviceClass}=="e0", ATTR{power/control}="on"
+    ACTION=="add", SUBSYSTEM=="bluetooth", TEST=="power/control", ATTR{power/control}="on"
+  '';
+
+  # --- Time/Locale ---
   time.timeZone = "Europe/Berlin";
-  
-  # Locale
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # Environment variables for Wayland
+  # --- Wayland env ---
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     MOZ_ENABLE_WAYLAND = "1";
     XDG_SESSION_TYPE = "wayland";
-    WLR_NO_HARDWARE_CURSORS = "1";  # If cursor issues
+    WLR_NO_HARDWARE_CURSORS = "1";
   };
   programs.xwayland.enable = true;
   programs.dconf.enable = true;
 
-  # XDG portal for screen sharing
+  # --- Portals ---
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
-  environment.systemPackages = [ pkgs.waybar ];
+  environment.systemPackages = with pkgs; [ waybar ];
 
-  # Audio stack (recommended)
-  hardware.pulseaudio.enable = false;
+  # --- Audio via PipeWire ---
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -50,7 +72,6 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     wireplumber.enable = true;
+    jack.enable = true;
   };
-
 }
-
