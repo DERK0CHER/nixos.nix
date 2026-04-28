@@ -65,7 +65,7 @@
     gnumake
     nodejs
     glib
-    qt6ct
+    qt6Packages.qt6ct
     pnpm
 
     # Node formatters
@@ -90,7 +90,7 @@
   # Fonts for Hyprland
   fonts.packages = with pkgs; [
     noto-fonts
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     font-awesome
     nerd-fonts.jetbrains-mono
     iosevka-comfy.comfy

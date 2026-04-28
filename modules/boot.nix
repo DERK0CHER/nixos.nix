@@ -14,12 +14,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Encrypted swap with random key each boot
-  swapDevices = lib.mkForce [
-    {
-      device = "/dev/disk/by-id/ata-SAMSUNG_SSD_830_Series_S0WJNYABC08589-part3";
-      randomEncryption.enable = true;
-    }
-  ];
+  # Override generated swap UUIDs from hardware-configuration.nix.
+  # This avoids boot-time waits/failures on missing devices.
+  swapDevices = lib.mkForce [ ];
+  zramSwap.enable = true;
 }
 

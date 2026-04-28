@@ -2,25 +2,21 @@
 { config, pkgs, ... }:
 
 {
-  # Enable Hyprland
+  # Session stack: GNOME + Hyprland + Niri
+  services.xserver.enable = true;
+  services.desktopManager.gnome.enable = true;
+
+  # Use GDM for Wayland sessions
+  services.displayManager.gdm.enable = true;
+  services.displayManager.defaultSession = "gnome";
+
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
   };
+  programs.niri.enable = true;
 
-  # Display manager for Hyprland
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-  };
-
-  # Essential services
+  # Essential desktop services
   services.dbus.enable = true;
   security.polkit.enable = true;
-
-  hardware = {
-    #Opengl
-    nvidia.modesetting.enable = true;
-  };
-
 }
