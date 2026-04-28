@@ -8,15 +8,19 @@
   boot.initrd.supportedFilesystems = [ "zfs" ];
 
   # Required for ZFS imports at boot
-  networking.hostId = "3d6394da";
+  networking.hostId = "d1c53402";
 
   # EFI bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Override generated swap UUIDs from hardware-configuration.nix.
-  # This avoids boot-time waits/failures on missing devices.
-  swapDevices = lib.mkForce [ ];
+  # Override generated swap UUIDs from hardware-configuration.nix
+  # and pin to the verified disk by-id path.
+  swapDevices = lib.mkForce [
+    {
+      device = "/dev/disk/by-id/ata-SAMSUNG_SSD_830_Series_S0WJNYABC08589-part3";
+    }
+  ];
   zramSwap.enable = true;
 }
 
