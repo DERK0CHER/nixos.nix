@@ -8,7 +8,7 @@
   boot.initrd.supportedFilesystems = [ "zfs" ];
 
   # Required for ZFS imports at boot
-  networking.hostId = "d1c53402";
+  networking.hostId = "3d6394da";
 
   # EFI bootloader
   boot.loader.systemd-boot.enable = true;
